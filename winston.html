@@ -1,0 +1,100 @@
+<head>
+  <title>winston</title>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
+
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+</head>
+
+<body class="light-blue darken-4">
+<nav class="light-blue darken-4 hide">
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">Winston</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down"></ul>
+  </div>
+</nav>
+</body>
+
+<template name="header">
+  <nav class="light-blue darken-4 ">
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Winston</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down"></ul>
+    </div>
+  </nav>
+</template>
+
+<template name="home">
+  <div class="white">
+    <div class="home container">
+      <div class="search">
+        <div class="row">
+          <div class="col s12 search">
+            <h1 class="hero center-align light-blue-text text-darken-4">Winston</h1>
+            <input class="search-input" type="text" placeholder="How can I help you?">
+          </div>
+        </div>
+      </div>
+      <div class="row results">
+        <div class="col s12">
+          {{#each results}}
+            {{> task}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    {{> atForm}}
+  </div>
+</template>
+
+<template name="profile">
+  <div class="white max-height">
+    {{> header}}
+    <div class="container">
+      <h1>Profile</h1>
+    </div>
+  </div>
+</template>
+
+<template name="createBlueprint">
+  <div class="white">
+    {{> header}}
+    <div class="container">
+      <div class="row">
+        <div class="col s10 offset-s1">
+          <label>What is the title of your blueprint?</label>
+          <input type="text" class="title">
+          <label>What does your blueprint do?</label>
+          <input type="text" class="description">
+          <p>This is what your blueprint will do. Your code is required to return a Promise or a value.</p>
+          <div id="editor" class="z-depth-2"></div>
+          <a class="save-task waves-effect right waves-light btn">Save Task</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="task">
+  <div class="row">
+    <div class="col s12 waves-effect waves-light">
+      <div tabindex="0" type="button" class="task card light-blue darken-4">
+        <div class="card-content white-text">
+          <span class="card-title">{{ title }}</span>
+          <p>{{description}}</p>
+        </div>
+        {{#if taskResult}}
+          <div class="card-action white-text">
+            <span>{{taskResult}}</span>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</template>

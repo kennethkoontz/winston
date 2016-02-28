@@ -1,0 +1,35 @@
+html, body, .home.container {
+    height: 100%
+}
+
+h1.hero {
+    font-size: 8em;
+    font-family: 'Arizonia', cursive;
+}
+
+.brand-logo {
+    font-family: 'Arizonia', cursive;
+    left: 20px;
+}
+
+.search.close {
+    height: auto;
+}
+
+.task {
+    cursor: pointer;
+}
+
+.max-height {
+    height: 100%;
+}
+
+#editor {
+    height: 400px;
+}
+
+.save-task {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
