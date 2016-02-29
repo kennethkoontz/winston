@@ -2,34 +2,88 @@
   <title>winston</title>
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
 
 
   <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 </head>
 
 <body class="light-blue darken-4">
-<nav class="light-blue darken-4 hide">
-  <div class="nav-wrapper">
-    <a href="#" class="brand-logo">Winston</a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down"></ul>
-  </div>
-</nav>
+
 </body>
 
 <template name="header">
-  <nav class="light-blue darken-4 ">
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Winston</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down"></ul>
+  <ul id="dropdown1" class="dropdown-content">
+    <li><a href="/blueprints" class="light-blue-text text-darken-4">Blueprints</a></li>
+    <li><a href="/tasks" class="light-blue-text text-darken-4">Tasks</a></li>
+    <li class="divider"></li>
+    <li><a href="/logout" class="light-blue-text text-darken-4">Logout</a></li>
+  </ul>
+  <div class="navbar-fixed">
+    <nav class="light-blue darken-4 ">
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo">Winston</a>
+        {{#if currentUser}}
+        <ul class="right hide-on-med-and-down">
+          <!-- Dropdown Trigger -->
+          <li>
+            <a class="dropdown-button" href="#!" data-activates="dropdown1">
+              <i class="material-icons right">arrow_drop_down</i>
+            </a>
+          </li>
+        </ul>
+        {{/if}}
+      </div>
+    </nav>
+  </div>
+</template>
+
+<template name="blueprints">
+  <div class="white max-height">
+    {{> header}}
+    <div class="container">
+      <div class="row">
+        <h5>Blueprints by me</h5>
+        {{#each mine}}
+          {{> blueprint}}
+        {{/each}}
+      </div>
+      <div class="row">
+        <h5>Blueprints by others</h5>
+        {{#each others}}
+          {{> blueprint}}
+        {{/each}}
+      </div>
     </div>
-  </nav>
+  </div>
+  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a href="/blueprints/create" class="btn-floating btn-large red">
+      <i class="large material-icons">add</i>
+    </a>
+  </div>
+</template>
+
+<template name="blueprint">
+  <div class="col col s6 m4 l3" style="padding-left: 10px; padding-right: 10px">
+    <div class="card light-blue darken-4">
+      <div class="card-content white-text">
+        <span class="card-title">{{ title }}</span>
+        <p> {{ description }} </p>
+      </div>
+      <div class="card-action">
+        <a href="#">Edit</a>
+      </div>
+    </div>
+  </div>
 </template>
 
 <template name="home">
   <div class="white">
+    <div class="header hide">
+      {{>header}}
+    </div>
     <div class="home container">
       <div class="search">
         <div class="row">

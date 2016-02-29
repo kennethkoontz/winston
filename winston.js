@@ -5,8 +5,17 @@ Router.route('/', function () {
   this.render('home');
 });
 
+Router.route('/logout', function () {
+  Meteor.logout();
+  this.render('home');
+});
+
 Router.route('/profile', function () {
   this.render('profile');
+});
+
+Router.route('/blueprints', function () {
+  this.render('blueprints');
 });
 
 Router.route('/blueprints/create', function () {
@@ -15,7 +24,7 @@ Router.route('/blueprints/create', function () {
 
 
 if (Meteor.isClient) {
-  Template.createBlueprint.rendered = function() {
+  Template.createBlueprint.rendered = function () {
     AceEditor.instance('editor', {
       mode: "javascript",
       theme: 'solarized_dark'
@@ -48,9 +57,28 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.blueprints.helpers({
+    mine: () => Blueprints.find({owner: Meteor.userId()}),
+    others: () => Blueprints.find({owner: {"$ne": Meteor.userId()}})
+  });
+
+  Template.header.rendered = () => {
+    $('.dropdown-button').dropdown({
+        inDuration: 300,
+        outDuration: 225,
+        constrain_width: false, // Does not change width of dropdown to that of the activator
+        hover: true, // Activate on hover
+        click: true,
+        gutter: 0, // Spacing from edge
+        belowOrigin: true, // Displays dropdown below the button
+        alignment: 'right' // Displays dropdown with edge aligned to the left of button
+      }
+    );
+  };
+
   Template.home.events({
     "keyup .search-input": event => {
-      $('nav').removeClass('hide');
+      $('.header.hide').removeClass('hide');
       $('h1').hide();
       $('.search').addClass('close');
 
