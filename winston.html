@@ -10,8 +10,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 </head>
 
-<body class="light-blue darken-4">
-
+<body>
 </body>
 
 <template name="header">
@@ -66,11 +65,12 @@
 </template>
 
 <template name="blueprint">
-  <div class="col col s6 m4 l3" style="padding-left: 10px; padding-right: 10px">
+  <div class="col s6 m4 l3" style="padding-left: 10px; padding-right: 10px">
     <div class="card light-blue darken-4">
       <div class="card-content white-text">
         <span class="card-title">{{ title }}</span>
-        <p> {{ description }} </p>
+        <p>{{ description }} </p>
+        <span class="small-text right">{{ owner_name }}</span>
       </div>
       <div class="card-action">
         <a href="#">Edit</a>

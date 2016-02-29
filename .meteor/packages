@@ -29,3 +29,4 @@ useraccounts:iron-routing
 service-configuration
 arch:ace-editor
 dcsan:reactive-ace
+jparker:gravatar

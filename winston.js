@@ -51,15 +51,21 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.blueprints.helpers({
+    mine: () => Blueprints.find({owner: Meteor.userId()}),
+    others: () => Blueprints.find({owner: {"$ne": Meteor.userId()}})
+  });
+
+  Template.blueprint.helpers({
+    gravatarUrl: function() {
+      return this.owner_email ? Gravatar.imageUrl(this.owner_email, {secure: true}) : 'http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&f=y';
+    }
+  });
+
   Template.task.helpers({
     taskResult: () => {
       return Session.get('taskResult');
     }
-  });
-
-  Template.blueprints.helpers({
-    mine: () => Blueprints.find({owner: Meteor.userId()}),
-    others: () => Blueprints.find({owner: {"$ne": Meteor.userId()}})
   });
 
   Template.header.rendered = () => {
@@ -128,7 +134,9 @@ if (Meteor.isServer) {
           title,
           description,
           fn,
-          owner: Meteor.userId()
+          owner: Meteor.userId(),
+          owner_name: Meteor.user().profile.name,
+          owner_email: Meteor.user().services.google.email
         });
       },
       runTask: (fnString, responseString) => {
